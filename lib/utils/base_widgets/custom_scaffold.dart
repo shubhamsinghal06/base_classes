@@ -1,5 +1,3 @@
-import 'package:base_classes/utils/base_loader/loaders/fading_circle.dart';
-
 import '../../base_classes.dart';
 
 class CustomScaffold extends StatelessWidget {

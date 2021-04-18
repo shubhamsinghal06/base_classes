@@ -96,19 +96,18 @@ Future kAlertDialog(context,
                       child: CustomText(text: secBtnText))
                 ]));
 
-kBackArrow(context, {onTap, arrowColor = blackColor}) =>
-    navigationCanPop(context: context)
-        ? GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: onTap,
-            child: Container(
-                padding: EdgeInsets.all(10.0),
-                child: Center(
-                    child: kImageAsset(context, 'left_arrow',
-                        height: 20.0,
-                        width: 20.0,
-                        color: arrowColor ?? blackColor))))
-        : Container();
+kBackArrow(context,
+        {onTap, arrowColor = blackColor, imagePath}) =>
+    GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        onTap: onTap,
+        child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Center(
+                child: kImageAsset(context, imagePath,
+                    height: 20.0,
+                    width: 20.0,
+                    color: arrowColor ?? blackColor))));
 
 const kAppbarPreferredHeight = Size.fromHeight(60.0);
 const kAppbarHeight = 60.0;
