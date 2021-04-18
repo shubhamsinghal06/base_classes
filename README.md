@@ -23,9 +23,16 @@ You basically have multiple base widgets that you can use:
 **• Basic styles and Strings class**,
 **• Loader class**,
 
-## 🚀 Showcase
+## 🚀 Showcase Demo
 
-![Base Class Demo](demo/base_classes.gif)
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://raw.githubusercontent.com/ybq/AndroidSpinKit/master/art/RotatingPlane.gif" width="430px" height="740px">
+      <br />
+    </td>
+  </tr>
+</table>
 
 Example:
 
