@@ -15,7 +15,6 @@ export 'package:base_classes/utils/base_widgets/custom_scaffold.dart';
 export 'package:base_classes/utils/base_widgets/custom_text.dart';
 export 'package:base_classes/utils/base_widgets/custom_text_hint_form.dart';
 export 'package:base_classes/utils/base_widgets/custom_text_label_form.dart';
-export 'package:base_classes/utils/common_widgets.dart';
 export 'package:base_classes/utils/constants.dart';
 export 'package:base_classes/utils/navigations.dart';
 export 'package:base_classes/utils/strings.dart';

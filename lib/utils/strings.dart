@@ -12,6 +12,7 @@ class Strings {
   static String update = 'Update';
   static var enterHere = 'Enter here';
   static var searchHere = 'Enter here';
+  static var tap = 'Tap';
 
   static String pleaseEnter(text) => 'Please enter $text';
 
@@ -58,8 +59,6 @@ class Strings {
   static String channelDescription = 'base';
   static int notifyId = 0;
   static String iconFcmPath = '@mipmap/ic_launcher';
-
-  // {notification: {body: AS, title: First}, data: {click_action: FLUTTER_NOTIFICATION_CLICK, action_id: 1, action_type: /trialScreen}}
 
   //tabs
   static String home = 'Home';
