@@ -1,8 +1,8 @@
 name: base_classes
-description: It includes set of all base classes along with Utils
-version: 0.0.1
+description: It includes set of all base classes along with Utils like CustomScaffold,CustomButton,CustomText,CustomTextForm Field, CustomTextForm Appbar,Constant class - It consist of various ease constant instances ,Navigation class,Shared Preference class,AfterInit Class - For getting context just after init method,Basic styles and Strings class,Loader class
+version: 0.0.2
 author: Shubham Singhal <shubhamanonymous@gmail.com>
-homepage: https://github.com/shubhamsinghan06/base_classes.git
+homepage: https://github.com/shubhamsinghal06/base_classes.git
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -13,9 +13,9 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
-  cached_network_image: ^2.3.3
-  intl: ^0.16.0
-  shared_preferences: ^0.5.12
+  cached_network_image: ^2.5.1
+  intl: ^0.16.1
+  shared_preferences: ^0.5.12+4
   synchronized: ^2.2.0+2
   toast: ^0.1.5
 

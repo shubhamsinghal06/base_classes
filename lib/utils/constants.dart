@@ -69,33 +69,6 @@ kCircularLoader(context) => Container(
     child: CircularProgressIndicator(
         strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(whiteColor)));
 
-Future kAlertDialog(context,
-        {@required heading,
-        @required subheading,
-        @required firstBtnText,
-        @required secBtnText,
-        @required Function firstClick,
-        @required Function secondClick}) =>
-    showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-                backgroundColor: whiteColor,
-                title: CustomText(text: heading, textAlign: TextAlign.start),
-                content:
-                    CustomText(text: subheading, textAlign: TextAlign.start),
-                actions: <Widget>[
-                  FlatButton(
-                      onPressed: () {
-                        firstClick();
-                      },
-                      child: CustomText(text: firstBtnText)),
-                  FlatButton(
-                      onPressed: () {
-                        secondClick();
-                      },
-                      child: CustomText(text: secBtnText))
-                ]));
-
 kBackArrow(context,
         {onTap, arrowColor = blackColor, imagePath}) =>
     GestureDetector(
