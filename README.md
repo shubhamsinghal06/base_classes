@@ -28,7 +28,7 @@ You basically have multiple base widgets that you can use:
 <table>
   <tr>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/ybq/AndroidSpinKit/master/art/RotatingPlane.gif" width="430px" height="740px">
+      <img src="https://raw.githubusercontent.com/shubhamsinghal06/base_classes/master/demo/base_classes.gif" width="180px" height="340px">
       <br />
     </td>
   </tr>
