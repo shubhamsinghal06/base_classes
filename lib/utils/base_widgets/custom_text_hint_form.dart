@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomTextFormHint : Base CLass for all hint forms fields
 class CustomTextFormHint extends StatelessWidget {
   final double height;
   final double width;
@@ -55,6 +56,7 @@ class CustomTextFormHint extends StatelessWidget {
     @required this.textInputAction,
   }) : super(key: key);
 
+  /// CustomTextFormHint Build : building hint form field
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,11 +1,12 @@
 # ✨ Base Classes
+[![pub package](https://img.shields.io/badge/Flutter-base-blue)](https://pub.dev/packages/base_classes) [![pub package](https://img.shields.io/badge/license-MIT-orange)](https://pub.dev/packages/base_classes)
 
 Make use of all custom base classes for code simplicity
 
 ## 🎖 Installing
 ```yaml
 dependencies:
-  base_classes: ^0.0.2
+  base_classes: 
 ```
 
 # Getting Started

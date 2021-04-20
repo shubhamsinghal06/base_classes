@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomAppBar: Base class for app bar
 class CustomAppBar extends PreferredSize {
   final String title;
   final Widget leading;
@@ -14,6 +15,7 @@ class CustomAppBar extends PreferredSize {
       this.bottomLine = false,
       this.scaffoldKey});
 
+  /// CustomAppBar Build: It will add app bar to CustomScaffold
   @override
   Widget build(BuildContext context) {
     return PreferredSize(

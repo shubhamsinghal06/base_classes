@@ -1,5 +1,6 @@
 import '../../../base_classes.dart';
 
+/// ThreeDots : Class
 class ThreeDots extends StatefulWidget {
   const ThreeDots({
     Key key,
@@ -22,12 +23,14 @@ class ThreeDots extends StatefulWidget {
   _ThreeDotsState createState() => _ThreeDotsState();
 }
 
+/// ThreeDots State : To show three dots loader
 class _ThreeDotsState extends State<ThreeDots> with TickerProviderStateMixin {
   AnimationController _scaleCtrl;
   AnimationController _rotateCtrl;
   Animation<double> _scale;
   Animation<double> _rotate;
 
+  ///  init control
   @override
   void initState() {
     super.initState();
@@ -45,6 +48,7 @@ class _ThreeDotsState extends State<ThreeDots> with TickerProviderStateMixin {
         .animate(CurvedAnimation(parent: _rotateCtrl, curve: Curves.linear));
   }
 
+  ///  dispose control
   @override
   void dispose() {
     _scaleCtrl.dispose();
@@ -52,6 +56,7 @@ class _ThreeDotsState extends State<ThreeDots> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  /// ThreeDots build : To load the animation
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -70,6 +75,7 @@ class _ThreeDotsState extends State<ThreeDots> with TickerProviderStateMixin {
     );
   }
 
+  ///  circle builders
   Widget _circle(double scale, int index) {
     return Transform.scale(
       scale: scale,

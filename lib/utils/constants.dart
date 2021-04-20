@@ -1,9 +1,12 @@
 import '../base_classes.dart';
 
+/// generating global key
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+/// generating global context
 final globalContext = navigatorKey.currentState.context;
 
+/// constant image
 kImageAsset(context, path,
         {width, height, color, fit = BoxFit.contain, extension = "png"}) =>
     Image.asset("assets/images/$path.$extension",
@@ -12,9 +15,11 @@ kImageAsset(context, path,
         color: color ?? null,
         fit: fit ?? null);
 
+/// constant asset image
 kAssetImage(context, path, {extension = "png"}) =>
     AssetImage('assets/images/$path.$extension');
 
+/// constant toast
 kShowToast(
         {@required context,
         @required message,
@@ -28,9 +33,11 @@ kShowToast(
         backgroundColor: backColor ?? whiteColor,
         textColor: textColor ?? whiteColor);
 
+/// constant hide keyboard
 kHideKeyboard(BuildContext context) =>
     FocusScope.of(context).requestFocus(FocusNode());
 
+/// constant round decoration
 kRoundCorner(color,
         {background,
         borderColor,
@@ -41,18 +48,23 @@ kRoundCorner(color,
         color: background ?? whiteColor,
         borderRadius: borderRadius);
 
+/// constant screen height
 kScreenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
+/// constant screen width
 kScreenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
+/// constant color of status bar
 kColorStatusBar(context, color) => SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(statusBarColor: color));
 
+/// constant loader
 kCubeLoader({context, color = greenColor}) =>
     Center(child: FadingCircle(itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(decoration: BoxDecoration(color: color));
     }));
 
+/// constant loader
 kThreeDotsLoader(context, {color = blueColor}) => Container(
     child: Center(
         child: ThreeDots(
@@ -63,12 +75,14 @@ kThreeDotsLoader(context, {color = blueColor}) => Container(
                       color: color, borderRadius: BorderRadius.circular(25.0)));
             })));
 
+/// constant circular loader
 kCircularLoader(context) => Container(
     height: 25,
     width: 25,
     child: CircularProgressIndicator(
         strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(whiteColor)));
 
+/// constant back arrow
 kBackArrow(context,
         {onTap, arrowColor = blackColor, imagePath}) =>
     GestureDetector(
@@ -82,9 +96,13 @@ kBackArrow(context,
                     width: 20.0,
                     color: arrowColor ?? blackColor))));
 
+/// constant app bar preferred height
 const kAppbarPreferredHeight = Size.fromHeight(60.0);
+
+/// constant app bar  height
 const kAppbarHeight = 60.0;
 
+/// constant internet check
 Future<bool> kInternetCheck() async {
   try {
     final result = await InternetAddress.lookup('google.com');
@@ -97,6 +115,7 @@ Future<bool> kInternetCheck() async {
   }
 }
 
+/// constant network cache image
 Widget kNetworkCachedImage(context, url, {width, height, color, fit}) =>
     CachedNetworkImage(
         imageUrl: "$url",
@@ -108,6 +127,7 @@ Widget kNetworkCachedImage(context, url, {width, height, color, fit}) =>
         width: width ?? null,
         fit: fit ?? null);
 
+/// constant network circular cache image
 Widget kNetworkCachedCircularImage(context, url,
         {width,
         height,
@@ -132,6 +152,7 @@ Widget kNetworkCachedCircularImage(context, url,
         width: width ?? null,
         fit: fit ?? null);
 
+/// constant network circular image
 kNetworkCircularImage(context, url,
         {width = 100.0,
         height = 100.0,
@@ -148,6 +169,7 @@ kNetworkCircularImage(context, url,
             borderRadius: BorderRadius.all(Radius.circular(50.0)),
             color: bgColor ?? Colors.transparent));
 
+/// constant gesture detector click action
 kClickAction(
         {@required BuildContext context,
         @required Widget child,
@@ -160,13 +182,17 @@ kClickAction(
         },
         behavior: HitTestBehavior.opaque);
 
+/// constant print log
 kPrintLog(message) => log(message ?? "");
 
+/// constant body padding
 const kBodyPadding = 20.0;
 
+/// constant scrolling view insert column child
 Widget kScrollingView(columnChild) => CustomScrollView(
     slivers: [SliverFillRemaining(hasScrollBody: false, child: columnChild)]);
 
+/// constant get th nd on date
 kFormatDaySuffix(DateTime date) {
   var suffix = "th";
   var digit = date.day % 10;
@@ -176,6 +202,7 @@ kFormatDaySuffix(DateTime date) {
   return new DateFormat("d'$suffix'").format(date);
 }
 
+/// constant time picker
 Future<TimeOfDay> kTimePickerDialog(context) async {
   return showTimePicker(
       context: context,
@@ -187,6 +214,7 @@ Future<TimeOfDay> kTimePickerDialog(context) async {
       });
 }
 
+/// constant date picker
 Future<DateTime> kDatePickerDialog(context) async {
   return showDatePicker(
       context: context,
@@ -195,6 +223,7 @@ Future<DateTime> kDatePickerDialog(context) async {
       lastDate: DateTime(2101));
 }
 
+/// constant get current time diff
 String kTimeDifference(String endedAt) {
   var endDate = DateTime.parse(endedAt).toLocal();
   var currentDate = DateTime.now();
@@ -215,6 +244,7 @@ String kTimeDifference(String endedAt) {
   return "$timeMins";
 }
 
+/// constant no data text
 Widget kNoDataText({@required text, size = size18}) => CustomText(
     text: text,
     textAlign: TextAlign.center,
@@ -222,6 +252,7 @@ Widget kNoDataText({@required text, size = size18}) => CustomText(
     color: greyColor1,
     fontSize: size);
 
+/// constant yes no bottom sheet
 kYesNoSheet(
     {@required context,
     @required Function yes,
@@ -308,6 +339,7 @@ kYesNoSheet(
                 }));
 }
 
+/// constant yes no dialog
 kYesNoDialog(
     {@required context,
     @required centerText,

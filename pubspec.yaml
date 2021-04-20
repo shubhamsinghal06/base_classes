@@ -1,8 +1,7 @@
 name: base_classes
-description: It includes set of all base classes along with Utils like CustomScaffold,CustomButton,CustomText,CustomTextForm Field, CustomTextForm Appbar,Constant class - It consist of various ease constant instances ,Navigation class,Shared Preference class,AfterInit Class - For getting context just after init method,Basic styles and Strings class,Loader class
-version: 0.0.2
-authors:
-  - Shubham Singhal <shubhamanonymous@gmail.com>
+description: It includes set of all base classes along with Utils like Scaffold,Button,Text,TextForm Field, CustomTextForm Appbar,Constant.
+version: 3.0.0
+author: Shubham Singhal <shubhamanonymous@gmail.com>
 homepage: https://github.com/shubhamsinghal06/base_classes.git
 
 environment:

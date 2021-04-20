@@ -1,7 +1,11 @@
-## [0.0.1] - 18 April 2021
+## [3.0.0] - 20 April 2021
 
-* added all base classes 
+* added inline documentation
 
-## [0.0.2] - 18 April 2021
+## [2.0.0] - 18 April 2021
 
 * resolving pub issues
+
+## [1.0.0] - 18 April 2021
+
+* added all base classes

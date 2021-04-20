@@ -1,3 +1,4 @@
+/// custom general strings
 class Strings {
   // route fields
   static String appName = 'AppName';

@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomButton: Base class for button
 class CustomButton extends StatelessWidget {
   final double height;
   final double radius;
@@ -24,6 +25,7 @@ class CustomButton extends StatelessWidget {
     this.isLoading = false,
   }) : super(key: key);
 
+  /// CustomButton Build: Click action and customisation
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

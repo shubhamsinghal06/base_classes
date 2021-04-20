@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomText : Base Class for all styles of text
 class CustomText extends StatelessWidget {
   final String text;
   final Color color;
@@ -22,6 +23,7 @@ class CustomText extends StatelessWidget {
     this.padding,
   }) : super(key: key);
 
+  /// CustomText Build: building view for texts
   @override
   Widget build(BuildContext context) {
     return Padding(

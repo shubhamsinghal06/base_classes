@@ -1,5 +1,6 @@
 import '../base_classes.dart';
 
+/// constant card input formatter
 class CardNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -26,6 +27,7 @@ class CardNumberInputFormatter extends TextInputFormatter {
   }
 }
 
+/// constant date input formatter
 class DateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -92,6 +94,7 @@ class DateFormatter extends TextInputFormatter {
   }
 }
 
+/// constant set length input format
 class LengthLimitingTextFieldFormatterFixed
     extends LengthLimitingTextInputFormatter {
   LengthLimitingTextFieldFormatterFixed(int maxLength) : super(maxLength);

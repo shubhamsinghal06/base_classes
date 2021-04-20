@@ -1,5 +1,6 @@
 import '../../../base_classes.dart';
 
+/// Fading circle : Class
 class FadingCircle extends StatefulWidget {
   const FadingCircle({
     Key key,
@@ -24,6 +25,7 @@ class FadingCircle extends StatefulWidget {
   _FadingCircleState createState() => _FadingCircleState();
 }
 
+/// FadingCircle: it will show fading circle loader
 class _FadingCircleState extends State<FadingCircle>
     with SingleTickerProviderStateMixin {
   final List<double> delays = [
@@ -42,6 +44,7 @@ class _FadingCircleState extends State<FadingCircle>
   ];
   AnimationController _controller;
 
+  ///  init animation
   @override
   void initState() {
     super.initState();
@@ -51,12 +54,14 @@ class _FadingCircleState extends State<FadingCircle>
       ..repeat();
   }
 
+  ///  dispose animation
   @override
   void dispose() {
     _controller.dispose();
     super.dispose();
   }
 
+  /// Build: To load the animation
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -88,6 +93,7 @@ class _FadingCircleState extends State<FadingCircle>
     );
   }
 
+  ///  item builders
   Widget _itemBuilder(int index) => widget.itemBuilder != null
       ? widget.itemBuilder(context, index)
       : DecoratedBox(

@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomScaffold: Base class for custom scaffold
 class CustomScaffold extends StatelessWidget {
   final PreferredSize appBar;
   final Color backgroundColor;
@@ -24,6 +25,7 @@ class CustomScaffold extends StatelessWidget {
       this.isLoading,
       this.drawer});
 
+  /// CustomScaffold Build: Building base scaffold
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

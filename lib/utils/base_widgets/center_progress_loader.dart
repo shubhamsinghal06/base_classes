@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CenterProgressLoader : Base class to show center screen loader
 class CenterProgressLoader extends StatelessWidget {
   final bool inAsyncCall;
   final double opacity;
@@ -22,6 +23,7 @@ class CenterProgressLoader extends StatelessWidget {
         assert(inAsyncCall != null),
         super(key: key);
 
+  /// CenterProgressLoader Build: Will show loader above all other widgets
   @override
   Widget build(BuildContext context) {
     if (!inAsyncCall) return child;

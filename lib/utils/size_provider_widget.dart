@@ -1,5 +1,6 @@
 import '../base_classes.dart';
 
+/// get size of input widget
 class SizeProviderWidget extends StatefulWidget {
   final Widget child;
   final Function(Size) onChildSize;
@@ -12,6 +13,7 @@ class SizeProviderWidget extends StatefulWidget {
 }
 
 class _SizeProviderWidgetState extends State<SizeProviderWidget> {
+  /// initialize widget
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -20,6 +22,7 @@ class _SizeProviderWidgetState extends State<SizeProviderWidget> {
     super.initState();
   }
 
+  /// build widget
   @override
   Widget build(BuildContext context) {
     return widget.child;

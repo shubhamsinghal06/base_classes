@@ -1,5 +1,6 @@
 import '../../base_classes.dart';
 
+/// CustomTextFormLabel : Base CLass for all label forms fields
 class CustomTextFormLabel extends StatelessWidget {
   final double height;
   final double width;
@@ -55,6 +56,7 @@ class CustomTextFormLabel extends StatelessWidget {
     @required this.textInputAction,
   }) : super(key: key);
 
+  /// CustomTextFormLabel Build : building label form field
   @override
   Widget build(BuildContext context) {
     return Container(
