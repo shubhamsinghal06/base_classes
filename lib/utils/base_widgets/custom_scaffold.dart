@@ -33,7 +33,7 @@ class CustomScaffold extends StatelessWidget {
             bottomNavigationBar: bottomNav,
             key: scaffoldKey,
             drawer: drawer,
-            resizeToAvoidBottomPadding: resizeToAvoidBottomPadding ?? false,
+            resizeToAvoidBottomInset: resizeToAvoidBottomPadding ?? false,
             backgroundColor: backgroundColor ?? whiteColor,
             appBar: appBar,
             body: CenterProgressLoader(

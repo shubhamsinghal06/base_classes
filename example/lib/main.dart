@@ -39,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
     Pref.putBool("YOUR_LOGIN_KEY", true);
     // then get bool anywhere in code
     Pref.getBool("YOUR_LOGIN_KEY");
+
+    kPrintLog('Log:${Pref.getBool("YOUR_LOGIN_KEY")}');
   }
 
   @override
@@ -51,8 +53,9 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
             title: Strings.home,
             scaffoldKey: scaffoldKey),
         resizeToAvoidBottomPadding: true,
-        onWillPop: () => Future.value(false),
-        isLoading: /*true*/ false,
+        onWillPop: () =>
+            Future.value(false), // make it true to enable back button android
+        isLoading: /*true*/ false, // make it true to enable loader
         body: Container(
             child: kScrollingView(Column(
                 mainAxisAlignment: MainAxisAlignment.center,
