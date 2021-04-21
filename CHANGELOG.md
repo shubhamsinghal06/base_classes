@@ -1,6 +1,10 @@
+## [3.0.2] - 21 April 2021
+
+* no plugins
+
 ## [3.0.1] - 21 April 2021
 
-* removed window support
+* removed all other classess
 
 ## [3.0.0] - 20 April 2021
 
