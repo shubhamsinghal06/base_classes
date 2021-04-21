@@ -2,11 +2,11 @@ import '../base_classes.dart';
 
 // toast class
 class Toast {
-  static final int LENGTH_SHORT = 1;
-  static final int LENGTH_LONG = 2;
-  static final int BOTTOM = 0;
-  static final int CENTER = 1;
-  static final int TOP = 2;
+  static final int lengthShort = 1;
+  static final int lengthLong = 2;
+  static final int bottomAlign = 0;
+  static final int centerAlign = 1;
+  static final int topAlign = 2;
 
   //show toast
   static void show(String msg, BuildContext context,
@@ -77,7 +77,7 @@ class ToastView {
     _isVisible = true;
     overlayState.insert(_overlayEntry);
     await new Future.delayed(
-        Duration(seconds: duration == null ? Toast.LENGTH_SHORT : duration));
+        Duration(seconds: duration == null ? Toast.lengthShort : duration));
     dismiss();
   }
 

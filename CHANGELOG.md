@@ -1,3 +1,7 @@
+## [3.0.3] - 21 April 2021
+
+* dart analysis passed
+
 ## [3.0.2] - 21 April 2021
 
 * no plugins

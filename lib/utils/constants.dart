@@ -27,8 +27,8 @@ kShowToast(
         backColor,
         textColor}) =>
     Toast.show("${message.toString()}", context,
-        duration: Toast.LENGTH_LONG,
-        gravity: Toast.BOTTOM,
+        duration: Toast.lengthLong,
+        gravity: Toast.bottomAlign,
         backgroundRadius: backRadius ?? 18.0,
         backgroundColor: backColor ?? whiteColor,
         textColor: textColor ?? whiteColor);
