@@ -13,10 +13,6 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.0
-  cached_network_image: ^2.5.1
-  intl: ^0.16.1
-  shared_preferences: ^0.5.12+4
-  synchronized: ^2.2.0+2
   toast: ^0.1.5
 
 dev_dependencies:

@@ -1,11 +1,9 @@
 import 'package:base_classes/base_classes.dart';
 import 'package:base_classes/utils/after_init.dart';
-import 'package:base_classes/utils/preference_utils.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Pref.getInstance();
   Strings.countryCode = Strings.countryCodeIndia;
   runApp(MyApp());
 }
@@ -36,11 +34,6 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
   @override
   void afterInit(BuildContext context) {
     //get context here for init method
-    Pref.putBool("YOUR_LOGIN_KEY", true);
-    // then get bool anywhere in code
-    Pref.getBool("YOUR_LOGIN_KEY");
-
-    kPrintLog('Log:${Pref.getBool("YOUR_LOGIN_KEY")}');
   }
 
   @override
@@ -84,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
                   SizedBox(height: 150.0),
                   kClickAction(
                       context: context,
-                      child: kNetworkCachedCircularImage(
+                      child: kNetworkCircularImage(
                           context, Strings.dummyImageURL,
                           height: 150.0, width: 150.0),
                       onTap: () {

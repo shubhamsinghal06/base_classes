@@ -115,43 +115,6 @@ Future<bool> kInternetCheck() async {
   }
 }
 
-/// constant network cache image
-Widget kNetworkCachedImage(context, url, {width, height, color, fit}) =>
-    CachedNetworkImage(
-        imageUrl: "$url",
-        progressIndicatorBuilder: (context, url, progress) =>
-            ThreeDots(color: greyColor1, size: 15.0),
-        errorWidget: (context, url, error) =>
-            Icon(Icons.error, color: greyColor1),
-        height: height ?? null,
-        width: width ?? null,
-        fit: fit ?? null);
-
-/// constant network circular cache image
-Widget kNetworkCachedCircularImage(context, url,
-        {width,
-        height,
-        color,
-        fit,
-        progressColor = greyColor1,
-        radius = const Radius.circular(50)}) =>
-    CachedNetworkImage(
-        imageBuilder: (context, imageProvider) => Container(
-            height: width,
-            width: height,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(radius),
-                image:
-                    DecorationImage(image: imageProvider, fit: BoxFit.cover))),
-        imageUrl: "$url",
-        progressIndicatorBuilder: (context, url, progress) =>
-            ThreeDots(color: progressColor, size: 15.0),
-        errorWidget: (context, url, error) =>
-            Icon(Icons.error, color: greyColor1),
-        height: height ?? null,
-        width: width ?? null,
-        fit: fit ?? null);
-
 /// constant network circular image
 kNetworkCircularImage(context, url,
         {width = 100.0,
@@ -191,16 +154,6 @@ const kBodyPadding = 20.0;
 /// constant scrolling view insert column child
 Widget kScrollingView(columnChild) => CustomScrollView(
     slivers: [SliverFillRemaining(hasScrollBody: false, child: columnChild)]);
-
-/// constant get th nd on date
-kFormatDaySuffix(DateTime date) {
-  var suffix = "th";
-  var digit = date.day % 10;
-  if ((digit > 0 && digit < 4) && (date.day < 11 || date.day > 13)) {
-    suffix = ["st", "nd", "rd"][digit - 1];
-  }
-  return new DateFormat("d'$suffix'").format(date);
-}
 
 /// constant time picker
 Future<TimeOfDay> kTimePickerDialog(context) async {

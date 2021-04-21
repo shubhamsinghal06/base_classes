@@ -1,6 +1,6 @@
 ## [3.0.1] - 21 April 2021
 
-* removed shared preference window support
+* removed window support
 
 ## [3.0.0] - 20 April 2021
 
