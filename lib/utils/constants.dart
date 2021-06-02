@@ -1,12 +1,11 @@
 import '../base_classes.dart';
 
-/// generating global key
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-/// generating global context
-final globalContext = navigatorKey.currentState.context;
+final BuildContext globalContext = navigatorKey.currentState!.context;
 
-/// constant image
+String kTargetPath = '';
+
 kImageAsset(context, path,
         {width, height, color, fit = BoxFit.contain, extension = "png"}) =>
     Image.asset("assets/images/$path.$extension",
@@ -15,29 +14,53 @@ kImageAsset(context, path,
         color: color ?? null,
         fit: fit ?? null);
 
-/// constant asset image
 kAssetImage(context, path, {extension = "png"}) =>
     AssetImage('assets/images/$path.$extension');
 
-/// constant toast
 kShowToast(
-        {@required context,
-        @required message,
-        backRadius,
-        backColor,
-        textColor}) =>
+        {required context,
+        required message,
+        backRadius = 18.0,
+        backColor = greyColor,
+        fontSize = size14,
+        fontWeight = fontWeigh500,
+        textColor = whiteColor}) =>
     Toast.show("${message.toString()}", context,
         duration: Toast.lengthLong,
-        gravity: Toast.bottomAlign,
-        backgroundRadius: backRadius ?? 18.0,
-        backgroundColor: backColor ?? whiteColor,
-        textColor: textColor ?? whiteColor);
+        gravity: Toast.bottom,
+        backgroundRadius: backRadius,
+        backgroundColor: backColor,
+        textStyle: TextStyle(
+            decoration: TextDecoration.none,
+            fontFamily: fontFamily,
+            color: textColor,
+            fontWeight: fontWeight,
+            fontSize: fontSize));
 
-/// constant hide keyboard
+kShowToaster(
+        {required context,
+        required message,
+        decoration,
+        icon,
+        durationMilliSeconds = 2500,
+        alignToast = AlignToast.top,
+        fontSize = size14,
+        fontWeight = fontWeigh500,
+        fontColor = whiteColor}) =>
+    ToastAnimate().createView(
+        message: message,
+        context: context,
+        decoration: decoration,
+        fontSize: fontSize,
+        fontColor: fontColor,
+        fontWeight: fontWeight,
+        durationMilliSeconds: durationMilliSeconds,
+        icon: icon,
+        alignToast: alignToast);
+
 kHideKeyboard(BuildContext context) =>
     FocusScope.of(context).requestFocus(FocusNode());
 
-/// constant round decoration
 kRoundCorner(color,
         {background,
         borderColor,
@@ -48,61 +71,100 @@ kRoundCorner(color,
         color: background ?? whiteColor,
         borderRadius: borderRadius);
 
-/// constant screen height
 kScreenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
-/// constant screen width
 kScreenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
-/// constant color of status bar
 kColorStatusBar(context, color) => SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(statusBarColor: color));
 
-/// constant loader
-kCubeLoader({context, color = greenColor}) =>
-    Center(child: FadingCircle(itemBuilder: (BuildContext context, int index) {
-      return DecoratedBox(decoration: BoxDecoration(color: color));
-    }));
+kCubeLoader(context) => Consumer<ThemeProvider>(
+    builder: (context, model, child) => Center(child:
+            LoaderFadingCube(itemBuilder: (BuildContext context, int index) {
+          return DecoratedBox(
+              decoration: BoxDecoration(
+                  color: model.isDarkTheme ? whiteColor : greenColor));
+        })));
 
-/// constant loader
-kThreeDotsLoader(context, {color = blueColor}) => Container(
-    child: Center(
-        child: ThreeDots(
-            size: 20.0,
-            itemBuilder: (BuildContext context, int index) {
-              return DecoratedBox(
-                  decoration: BoxDecoration(
-                      color: color, borderRadius: BorderRadius.circular(25.0)));
-            })));
-
-/// constant circular loader
-kCircularLoader(context) => Container(
-    height: 25,
-    width: 25,
-    child: CircularProgressIndicator(
-        strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(whiteColor)));
-
-/// constant back arrow
-kBackArrow(context,
-        {onTap, arrowColor = blackColor, imagePath}) =>
-    GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: onTap,
-        child: Container(
-            padding: EdgeInsets.all(10.0),
+kThreeDotsLoader({context, color = blueColor, size = 20.0}) =>
+    Consumer<ThemeProvider>(
+        builder: (context, model, child) => Container(
             child: Center(
-                child: kImageAsset(context, imagePath,
-                    height: 20.0,
-                    width: 20.0,
-                    color: arrowColor ?? blackColor))));
+                child: LoaderThreeBounce(
+                    size: size,
+                    itemBuilder: (BuildContext context, int index) {
+                      return DecoratedBox(
+                          decoration: BoxDecoration(
+                              color: color,
+                              borderRadius: BorderRadius.circular(25.0)));
+                    }))));
 
-/// constant app bar preferred height
+kCircularLoader({context, height = 25.0, width = 25.0, color = whiteColor}) =>
+    Container(
+        height: height,
+        width: width,
+        child: CircularProgressIndicator(
+            strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(color)));
+
+Future kAlertDialog(context,
+        {required heading,
+        required subheading,
+        required firstBtnText,
+        required secBtnText,
+        required Function firstClick,
+        required Function secondClick}) =>
+    showDialog(
+        context: context,
+        builder: (context) => Consumer<ThemeProvider>(
+            builder: (context, model, child) => AlertDialog(
+                    backgroundColor: model.isDarkTheme ? greyColor : whiteColor,
+                    title:
+                        CustomText(text: heading, textAlign: TextAlign.start),
+                    content: CustomText(
+                        text: subheading, textAlign: TextAlign.start),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () {
+                            firstClick();
+                          },
+                          child: CustomText(text: firstBtnText)),
+                      TextButton(
+                          onPressed: () {
+                            secondClick();
+                          },
+                          child: CustomText(text: secBtnText))
+                    ])));
+
+kBackArrow(context, {onTap, arrowColor = blackColor}) =>
+    navigationCanPop(context: context)
+        ? Consumer<ThemeProvider>(
+            builder: (context, model, child) => GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: onTap,
+                child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    child: Center(
+                        child: kImageAsset(context, 'left_arrow',
+                            height: 20.0,
+                            width: 20.0,
+                            color: arrowColor ?? blackColor)))))
+        : Container();
+
 const kAppbarPreferredHeight = Size.fromHeight(60.0);
-
-/// constant app bar  height
 const kAppbarHeight = 60.0;
 
-/// constant network circular image
+Future<bool> kInternetCheck() async {
+  try {
+    final result = await InternetAddress.lookup('google.com');
+    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+      return true;
+    }
+    return false;
+  } on Exception catch (_) {
+    return false;
+  }
+}
+
 kNetworkCircularImage(context, url,
         {width = 100.0,
         height = 100.0,
@@ -119,43 +181,47 @@ kNetworkCircularImage(context, url,
             borderRadius: BorderRadius.all(Radius.circular(50.0)),
             color: bgColor ?? Colors.transparent));
 
-/// constant gesture detector click action
-kClickAction(
-        {@required BuildContext context,
-        @required Widget child,
-        @required Function onTap}) =>
-    GestureDetector(
-        child: child,
-        onTap: () {
-          kHideKeyboard(context);
-          onTap();
-        },
-        behavior: HitTestBehavior.opaque);
+kClickActionSquash(
+        {required BuildContext context,
+        required Widget child,
+        bool? withEffect = true,
+        BorderRadius borderRadius = BorderRadius.zero,
+        Color splashColor = blackColor,
+        required Function onTap}) =>
+    withEffect!
+        ? SquashEffect(
+            color: splashColor,
+            borderRadius: borderRadius,
+            child: child,
+            onTap: () {
+              kHideKeyboard(context);
+              onTap();
+            })
+        : GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            child: child,
+            onTap: () {
+              kHideKeyboard(context);
+              onTap();
+            });
 
-/// constant print log
 kPrintLog(message) => log(message ?? "");
 
-/// constant body padding
 const kBodyPadding = 20.0;
 
-/// constant scrolling view insert column child
 Widget kScrollingView(columnChild) => CustomScrollView(
     slivers: [SliverFillRemaining(hasScrollBody: false, child: columnChild)]);
 
-/// constant time picker
-Future<TimeOfDay> kTimePickerDialog(context) async {
+Future<TimeOfDay?> showTimePickerDialog(context) async {
   return showTimePicker(
       context: context,
       initialTime: TimeOfDay(hour: 00, minute: 00),
-      builder: (BuildContext context, Widget child) {
-        return MediaQuery(
-            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-            child: child);
-      });
+      builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!));
 }
 
-/// constant date picker
-Future<DateTime> kDatePickerDialog(context) async {
+Future<DateTime?> showDatePickerDialog(context) async {
   return showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -163,8 +229,25 @@ Future<DateTime> kDatePickerDialog(context) async {
       lastDate: DateTime(2101));
 }
 
-/// constant get current time diff
-String kTimeDifference(String endedAt) {
+extension TimeOfDayExtension on TimeOfDay {
+  int smallGreaterCompare(TimeOfDay other) {
+    if (this.hour < other.hour) return -1;
+    if (this.hour > other.hour) return 1;
+    if (this.minute < other.minute) return -1;
+    if (this.minute > other.minute) return 1;
+    return 0;
+  }
+
+  int durationDiff(TimeOfDay other, int duration) {
+    if (this.hour < other.hour &&
+        (other.minute - this.minute).abs() == duration) return -1;
+    if (this.hour > other.hour &&
+        (this.minute - other.minute).abs() == duration) return 1;
+    return 0;
+  }
+}
+
+String timeDifference(String endedAt) {
   var endDate = DateTime.parse(endedAt).toLocal();
   var currentDate = DateTime.now();
   var difference = endDate.difference(currentDate);
@@ -172,39 +255,67 @@ String kTimeDifference(String endedAt) {
     return "00:00";
   }
   var splitArray = difference.toString().split(":");
-  var timeMins = splitArray.elementAt(0);
+  var timeMin = splitArray.elementAt(0);
   var timeSeconds = splitArray.elementAt(1);
-  if (timeMins.length == 1) {
-    timeMins = "0$timeMins";
+  if (timeMin.length == 1) {
+    timeMin = "0$timeMin";
   }
   if (timeSeconds.length == 1) {
     timeSeconds = "0$timeSeconds";
   }
-  //"$timeMins:$timeSeconds"
-  return "$timeMins";
+  //"timeMin:$timeSeconds"
+  return "$timeMin";
 }
 
-/// constant no data text
-Widget kNoDataText({@required text, size = size18}) => CustomText(
+kGalleryPicker(context, {source}) => showModalBottomSheet(
+    context: context,
+    builder: (BuildContext bc) {
+      return Container(
+          child: Container(
+              child: Wrap(children: <Widget>[
+                Divider(height: 1.0, color: greyColor),
+                ListTile(
+                    leading: Icon(Icons.photo, color: greyColor),
+                    title: CustomText(
+                        textAlign: TextAlign.start,
+                        text: Strings.image,
+                        color: greyColor),
+                    onTap: () => {source(0), goBack(context: context)}),
+                Divider(height: 1.0, color: greyColor),
+                ListTile(
+                    leading:
+                        Icon(Icons.video_collection_sharp, color: greyColor),
+                    title: CustomText(
+                        textAlign: TextAlign.start,
+                        text: Strings.video,
+                        color: greyColor),
+                    onTap: () => {source(1), goBack(context: context)}),
+                Divider(height: 1.0, color: greyColor)
+              ]),
+              color: whiteColor));
+    });
+
+Widget kNoDataText({required text, size = size18}) => CustomText(
     text: text,
     textAlign: TextAlign.center,
     fontWeight: fontWeigh500,
     color: greyColor1,
     fontSize: size);
 
-/// constant yes no bottom sheet
 kYesNoSheet(
-    {@required context,
-    @required Function yes,
-    @required Function no,
-    @required String heading,
+    {required context,
+    required Function yes,
+    required Function no,
+    required String heading,
     centerTextColor,
     btnTextYes,
+    btnTextYesColor,
     btnTextNo,
+    btnTextNoColor,
     btnColorYes,
     btnColorNo,
     bool showNoBtn = false,
-    Function onBackPress,
+    Function? onBackPress,
     bool simpleBackPress = true}) {
   showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -242,6 +353,7 @@ kYesNoSheet(
                                   children: [
                                     if (showNoBtn)
                                       CustomButton(
+                                          textDecoration: TextDecoration.none,
                                           onTap: () {
                                             kHideKeyboard(context);
                                             goBack(context: ctx);
@@ -249,19 +361,21 @@ kYesNoSheet(
                                           },
                                           text: btnTextNo ?? Strings.no,
                                           buttonColor: btnColorNo ?? greyColor1,
-                                          textColor: whiteColor,
+                                          textColor:
+                                              btnTextNoColor ?? whiteColor,
                                           width: 94.0,
                                           height: 44.0),
                                     if (showNoBtn) SizedBox(width: 10.0),
                                     CustomButton(
+                                        textDecoration: TextDecoration.none,
                                         onTap: () {
                                           kHideKeyboard(context);
-                                          goBack(context: ctx);
                                           return yes();
                                         },
                                         text: btnTextYes ?? Strings.ok,
                                         buttonColor: btnColorYes ?? yellowColor,
-                                        textColor: whiteColor,
+                                        textColor:
+                                            btnTextYesColor ?? whiteColor,
                                         width: 94.0,
                                         height: 44.0),
                                   ]),
@@ -273,26 +387,26 @@ kYesNoSheet(
               ? () => Future.value(true)
               : () {
                   kHideKeyboard(context);
-                  goBack(context: context);
-                  onBackPress();
+                  onBackPress!();
                   return Future.value(true);
                 }));
 }
 
-/// constant yes no dialog
 kYesNoDialog(
-    {@required context,
-    @required centerText,
-    @required Function yes,
-    @required Function no,
+    {required context,
+    required centerText,
+    required Function yes,
+    required Function no,
     showNoBool = false,
     btnTextYes,
+    btnTextYesColor,
     btnTextNo,
+    btnTextNoColor,
     btnColorYes,
     btnColorNo,
     centerTextColor,
     isDismissible = true,
-    Function onBackPress,
+    Function? onBackPress,
     bool simpleBackPress = true}) {
   showGeneralDialog(
       barrierLabel: "",
@@ -326,24 +440,24 @@ kYesNoDialog(
                               children: [
                                 if (showNoBool)
                                   CustomButton(
+                                      textDecoration: TextDecoration.none,
                                       width: 100.0,
-                                      textColor: whiteColor,
+                                      textColor: btnTextNoColor ?? whiteColor,
                                       height: 44.0,
                                       onTap: () {
                                         kHideKeyboard(context);
-                                        goBack(context: context);
                                         return no();
                                       },
                                       text: btnTextNo ?? Strings.no,
                                       buttonColor: btnColorNo ?? orangeColor),
                                 if (showNoBool) SizedBox(width: 30.0),
                                 CustomButton(
+                                    textDecoration: TextDecoration.none,
                                     width: 100.0,
-                                    textColor: whiteColor,
+                                    textColor: btnTextYesColor ?? whiteColor,
                                     height: 44.0,
                                     onTap: () {
                                       kHideKeyboard(context);
-                                      goBack(context: context);
                                       return yes();
                                     },
                                     text: btnTextYes ?? Strings.yes,
@@ -360,7 +474,7 @@ kYesNoDialog(
                 : () {
                     kHideKeyboard(context);
                     goBack(context: context);
-                    onBackPress();
+                    onBackPress!();
                     return Future.value(true);
                   });
       },
@@ -371,3 +485,19 @@ kYesNoDialog(
             child: child);
       });
 }
+
+Widget kAppBarBottomLine({color = greyColor, height: 1.5}) =>
+    Container(color: color.withOpacity(0.13), height: height);
+
+TextStyle kTextStyle(
+        {decoration = TextDecoration.none,
+        fontFamily = fontFamily,
+        color = greyColor,
+        fontWeight = fontWeigh500,
+        fontSize = size12}) =>
+    TextStyle(
+        decoration: decoration,
+        fontFamily: fontFamily,
+        color: color,
+        fontWeight: fontWeight,
+        fontSize: fontSize);

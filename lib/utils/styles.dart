@@ -1,6 +1,5 @@
 import '../base_classes.dart';
 
-/// sizes
 const double size28 = 28.0;
 const double size24 = 24.0;
 const double size22 = 22.0;
@@ -14,7 +13,6 @@ const double size11 = 11.0;
 const double size10 = 10.0;
 const double size9 = 9.0;
 
-/// weight
 const FontWeight fontWeigh1000 = FontWeight.bold;
 const FontWeight fontWeigh900 = FontWeight.w900;
 const FontWeight fontWeigh800 = FontWeight.w800;
@@ -24,7 +22,6 @@ const FontWeight fontWeigh500 = FontWeight.w500;
 const FontWeight fontWeigh400 = FontWeight.w400;
 const FontWeight fontWeigh300 = FontWeight.w300;
 
-/// colors
 const Color whiteColor = Color(0xffffffff);
 const Color blackColor = Color(0xff000000);
 const Color greyColor = Color(0xff7a7a7a);
@@ -56,5 +53,4 @@ const graphYellow =
 const graphPurple =
     MaterialColor(0xffCE93D8, <int, Color>{50: Color(0xffCE93D8)});
 
-//font family
 const String fontFamily = 'Roboto';

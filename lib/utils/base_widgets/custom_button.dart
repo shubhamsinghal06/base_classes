@@ -1,55 +1,78 @@
 import '../../base_classes.dart';
 
-/// CustomButton: Base class for button
+/// Custom Button with container with Base definition
 class CustomButton extends StatelessWidget {
-  final double height;
-  final double radius;
-  final double width;
+  final bool? isLoading;
+  final bool? withEffect;
+  final Color? buttonColor;
+  final Color? textColor;
+  final double? height;
+  final double? radius;
+  final double? width;
+  final EdgeInsetsGeometry? padding;
   final Function onTap;
-  final Color buttonColor;
-  final Color textColor;
+  final FontWeight? fontWeight;
   final String text;
-  final EdgeInsetsGeometry padding;
-  final isLoading;
+  final TextAlign? textAlign;
+  final TextDecoration? textDecoration;
+  final Widget? progressIndicator;
 
   const CustomButton({
-    Key key,
+    Key? key,
     this.height,
     this.width,
-    @required this.onTap,
-    @required this.text,
-    this.buttonColor,
-    this.textColor,
-    this.radius,
-    this.padding,
+    this.withEffect = true,
+    required this.onTap,
+    required this.text,
+    this.buttonColor = whiteColor,
+    this.textDecoration = TextDecoration.none,
+    this.textColor = blackColor,
+    this.radius = 10.0,
+    this.textAlign = TextAlign.center,
+    this.fontWeight = fontWeigh500,
+    this.padding = EdgeInsets.zero,
+    this.progressIndicator = const CircularProgressIndicator(
+        strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(whiteColor)),
     this.isLoading = false,
   }) : super(key: key);
 
-  /// CustomButton Build: Click action and customisation
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () {
-          kHideKeyboard(context);
-          onTap();
-        },
-        child: Container(
-            padding: padding ?? EdgeInsets.zero,
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-                border: Border.all(color: Colors.transparent),
-                borderRadius: BorderRadius.all(Radius.circular(radius ?? 20)),
-                color: buttonColor ?? whiteColor),
-            child: Center(
-                child: isLoading
-                    ? kCircularLoader(context)
-                    : CustomText(
-                        text: text,
-                        fontSize: 16.0,
-                        fontWeight: fontWeigh500,
-                        color: textColor ?? blackColor,
-                        textAlign: TextAlign.center))));
+    if (withEffect!) {
+      return SquashEffect(
+          borderRadius: BorderRadius.all(Radius.circular(radius!)),
+          onTap: () {
+            kHideKeyboard(context);
+            onTap();
+          },
+          child: childWidget());
+    } else {
+      return GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () {
+            kHideKeyboard(context);
+            onTap();
+          },
+          child: childWidget());
+    }
   }
+
+  Widget childWidget() => Container(
+      padding: padding,
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.transparent),
+          borderRadius: BorderRadius.all(Radius.circular(radius!)),
+          color: buttonColor),
+      child: Center(
+          child: isLoading!
+              ? Container(height: 25, width: 25, child: progressIndicator)
+              : CustomText(
+                  decoration: textDecoration!,
+                  text: text,
+                  fontSize: size16,
+                  fontWeight: fontWeight!,
+                  color: textColor!,
+                  textAlign: textAlign!)));
 }

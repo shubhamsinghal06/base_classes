@@ -1,4 +1,3 @@
-/// custom general strings
 class Strings {
   // route fields
   static String appName = 'AppName';
@@ -11,9 +10,8 @@ class Strings {
   static String cancel = 'Cancel';
   static String save = 'Save';
   static String update = 'Update';
-  static var enterHere = 'Enter here';
-  static var searchHere = 'Enter here';
-  static var tap = 'Tap';
+  static String enterHere = 'Enter here';
+  static String searchHere = 'Enter here';
 
   static String pleaseEnter(text) => 'Please enter $text';
 
@@ -25,7 +23,7 @@ class Strings {
 
   static String noMode(data) => 'No more $data';
 
-  static var ok = 'Ok';
+  static String ok = 'Ok';
   static String yes = 'Yes';
   static String no = 'No';
   static String submit = 'Submit';
@@ -53,6 +51,8 @@ class Strings {
   static String alertFcmKey = 'alert';
   static String actionType = 'action_type';
   static String actionId = 'action_id';
+  static String actionText = 'action_text';
+  static String messageKey = 'message';
 
   // fcm
   static String channelId = '1';
@@ -60,6 +60,8 @@ class Strings {
   static String channelDescription = 'base';
   static int notifyId = 0;
   static String iconFcmPath = '@mipmap/ic_launcher';
+
+  // {notification: {body: Test App Notification for user, title: BaseApp }, data: {click_action: FLUTTER_NOTIFICATION_CLICK, action_id: 1, action_text: Hi User !! This is test notification with custom data, action_type: trialScreen}}
 
   //tabs
   static String home = 'Home';
@@ -77,7 +79,20 @@ class Strings {
   static String camera = 'Camera';
   static String image = 'Image';
   static String video = 'Video';
-  static var typeHere = 'Type Here';
+  static String typeHere = 'Type Here';
+  static String noImageSelected = 'No Image selected?';
 
   static String logoutSubHeader = 'Are you sure you want to logout ?';
+
+  static String errorConnectionOpenTimeout =
+      'Oops!! Your network request was open for so long';
+  static String errorConnectionSentTimeout =
+      'Sorry!! Your data is not sent within time';
+  static String errorConnectionReceiveTimeout =
+      'Oops!! Your data is not received within time';
+  static String errorIncorrectStatus = 'Oops!! Something went wrong!!';
+  static String errorRequestCancelled = 'Oops!! Your cancelled it';
+
+  static String trial = 'Trial';
+  static String arguments = 'arguments';
 }

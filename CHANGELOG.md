@@ -1,3 +1,7 @@
+## [3.1.0] - 2 June 2021
+
+* adding null safety
+
 ## [3.0.3] - 21 April 2021
 
 * dart analysis passed

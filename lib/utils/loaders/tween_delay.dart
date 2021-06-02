@@ -1,20 +1,18 @@
 import 'dart:math' as math show sin, pi;
 
-import 'package:flutter/animation.dart';
+import '../../base_classes.dart';
 
-/// DelayTween : It will execute in between animation
+/// Tween delay for loaders
 class DelayTween extends Tween<double> {
-  DelayTween({double begin, double end, this.delay})
+  DelayTween({double? begin, double? end, required this.delay})
       : super(begin: begin, end: end);
 
   final double delay;
 
-  /// DelayTween : lerp the view with mathematic
   @override
   double lerp(double t) =>
       super.lerp((math.sin((t - delay) * 2 * math.pi) + 1) / 2);
 
-  /// DelayTween : evaluation on lerp
   @override
   double evaluate(Animation<double> animation) => lerp(animation.value);
 }

@@ -1,6 +1,6 @@
 import '../base_classes.dart';
 
-/// constant card input formatter
+/// card input formatter
 class CardNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -27,17 +27,15 @@ class CardNumberInputFormatter extends TextInputFormatter {
   }
 }
 
-/// constant date input formatter
+/// date input formatter
 class DateFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue prevText, TextEditingValue currText) {
     int selectionIndex;
 
-    // Get the previous and current input strings
     String pText = prevText.text;
     String cText = currText.text;
-    // Abbreviate lengths
     int cLen = cText.length;
     int pLen = pText.length;
 
@@ -88,16 +86,15 @@ class DateFormatter extends TextInputFormatter {
 
     selectionIndex = cText.length;
     return TextEditingValue(
-      text: cText,
-      selection: TextSelection.collapsed(offset: selectionIndex),
-    );
+        text: cText,
+        selection: TextSelection.collapsed(offset: selectionIndex));
   }
 }
 
-/// constant set length input format
+/// limiting input formatter
 class LengthLimitingTextFieldFormatterFixed
     extends LengthLimitingTextInputFormatter {
-  LengthLimitingTextFieldFormatterFixed(int maxLength) : super(maxLength);
+  LengthLimitingTextFieldFormatterFixed(int? maxLength) : super(maxLength);
 
   @override
   TextEditingValue formatEditUpdate(
@@ -105,13 +102,13 @@ class LengthLimitingTextFieldFormatterFixed
     TextEditingValue newValue,
   ) {
     if (maxLength != null &&
-        maxLength > 0 &&
-        newValue.text.characters.length > maxLength) {
+        maxLength! > 0 &&
+        newValue.text.characters.length > maxLength!) {
       if (oldValue.text.characters.length == maxLength) {
         return oldValue;
       }
       // ignore: invalid_use_of_visible_for_testing_member
-      return LengthLimitingTextInputFormatter.truncate(newValue, maxLength);
+      return LengthLimitingTextInputFormatter.truncate(newValue, maxLength!);
     }
     return newValue;
   }

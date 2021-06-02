@@ -1,39 +1,60 @@
 import '../../base_classes.dart';
 
-/// CustomAppBar: Base class for app bar
-class CustomAppBar extends PreferredSize {
+/// Custom App Bar with Base definition
+class CustomAppBar extends StatelessWidget implements PreferredSize {
+  final double? fontSize;
+  final double? elevation;
+  final FontWeight? fontWeight;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
+  final List<Widget>? actionItems;
   final String title;
-  final Widget leading;
-  final Size preferredSize;
-  final GlobalKey<ScaffoldState> scaffoldKey;
-  final bool bottomLine;
+  final Size? height;
+  final Widget? leading;
+  final Widget? bottomLineWidget;
 
   CustomAppBar(
-      {@required this.preferredSize,
-      @required this.title,
+      {Key? key,
+      this.elevation = 0.0,
+      this.fontSize = size22,
+      this.fontWeight = fontWeigh500,
+      this.scaffoldKey,
+      this.actionItems,
+      this.height,
+      required this.title,
       this.leading,
-      this.bottomLine = false,
-      this.scaffoldKey});
+      this.bottomLineWidget})
+      : preferredSize = Size.fromHeight(kAppbarHeight),
+        super(key: key);
 
-  /// CustomAppBar Build: It will add app bar to CustomScaffold
+  @override
+  final Size preferredSize;
+
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-        preferredSize: preferredSize,
-        child: Container(
-            margin: EdgeInsets.only(top: 10),
-            child: AppBar(
-                bottom: PreferredSize(
-                    child: bottomLine
-                        ? Container(
-                            color: greyColor.withOpacity(0.13), height: 1.5)
-                        : Container(),
-                    preferredSize: Size.fromHeight(4.0)),
-                elevation: 0,
-                leading: leading ?? Container(),
-                centerTitle: true,
-                title: CustomText(
-                    text: title, color: blackColor, fontSize: size24),
-                backgroundColor: whiteColor)));
+        preferredSize: height ?? preferredSize,
+        child: SafeArea(
+            child: Container(
+                margin: EdgeInsets.only(top: 10),
+                child: Consumer<ThemeProvider>(
+                    builder: (context, model, child) => AppBar(
+                        shadowColor: orangeColor2,
+                        bottom: PreferredSize(
+                            child: bottomLineWidget ?? Container(),
+                            preferredSize: Size.fromHeight(4.0)),
+                        elevation: elevation,
+                        leading: leading ?? Container(),
+                        actions: actionItems,
+                        centerTitle: true,
+                        title: CustomText(
+                            text: title,
+                            fontWeight: fontWeight,
+                            color: model.darkTheme ? whiteColor : blackColor,
+                            fontSize: fontSize!),
+                        backgroundColor:
+                            model.darkTheme ? blackColor : whiteColor)))));
   }
+
+  @override
+  Widget get child => Container();
 }

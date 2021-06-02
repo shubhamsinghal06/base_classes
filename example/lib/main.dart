@@ -1,5 +1,4 @@
 import 'package:base_classes/base_classes.dart';
-import 'package:base_classes/utils/after_init.dart';
 import 'package:flutter/material.dart';
 
 Future<void> main() async {
@@ -21,18 +20,18 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
+class _MyHomePageState extends State<MyHomePage> with OnInit {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
-  void afterInit(BuildContext context) {
+  void afterFirstLayout(BuildContext context) {
     //get context here for init method
   }
 
@@ -40,15 +39,15 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
   Widget build(BuildContext context) {
     return CustomScaffold(
         appBar: CustomAppBar(
-            leading: kBackArrow(context,
-                onTap: () {}, arrowColor: blackColor, imagePath: 'left_arrow'),
-            preferredSize: kAppbarPreferredHeight,
+            leading: kBackArrow(context, onTap: () {}, arrowColor: blackColor),
+            height: kAppbarPreferredHeight,
             title: Strings.home,
             scaffoldKey: scaffoldKey),
         resizeToAvoidBottomPadding: true,
-        onWillPop: () =>
-            Future.value(false), // make it true to enable back button android
-        isLoading: /*true*/ false, // make it true to enable loader
+        onWillPop: () => Future.value(false),
+        // make it true to enable back button android
+        isLoading: /*true*/ false,
+        // make it true to enable loader
         body: Container(
             child: kScrollingView(Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -56,9 +55,9 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
                   SizedBox(height: 150.0),
                   CustomText(text: Strings.ok, fontSize: size20),
                   SizedBox(height: 150.0),
-                  CustomTextFormLabel(
+                  CustomFormLabel(
                       keyBoardType: TextInputType.text,
-                      labelText: Strings.enterHere,
+                      highlightText: Strings.enterHere,
                       textInputAction: TextInputAction.done),
                   SizedBox(height: 150.0),
                   CustomButton(
@@ -75,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> with AfterInitMixin {
                       height: 55.0,
                       buttonColor: orangeColor),
                   SizedBox(height: 150.0),
-                  kClickAction(
+                  kClickActionSquash(
                       context: context,
                       child: kNetworkCircularImage(
                           context, Strings.dummyImageURL,
