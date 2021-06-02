@@ -1,11 +1,12 @@
 import '../base_classes.dart';
 
+/// to get main navigator key
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
+/// to get all app context
 final BuildContext globalContext = navigatorKey.currentState!.context;
 
-String kTargetPath = '';
-
+/// base image asset
 kImageAsset(context, path,
         {width, height, color, fit = BoxFit.contain, extension = "png"}) =>
     Image.asset("assets/images/$path.$extension",
@@ -14,9 +15,11 @@ kImageAsset(context, path,
         color: color ?? null,
         fit: fit ?? null);
 
+/// base image asset
 kAssetImage(context, path, {extension = "png"}) =>
     AssetImage('assets/images/$path.$extension');
 
+/// base show simple toast
 kShowToast(
         {required context,
         required message,
@@ -37,6 +40,7 @@ kShowToast(
             fontWeight: fontWeight,
             fontSize: fontSize));
 
+/// base show animated toast
 kShowToaster(
         {required context,
         required message,
@@ -58,9 +62,11 @@ kShowToaster(
         icon: icon,
         alignToast: alignToast);
 
+/// hide keyboard
 kHideKeyboard(BuildContext context) =>
     FocusScope.of(context).requestFocus(FocusNode());
 
+/// constant round corner
 kRoundCorner(color,
         {background,
         borderColor,
@@ -71,13 +77,17 @@ kRoundCorner(color,
         color: background ?? whiteColor,
         borderRadius: borderRadius);
 
+/// get screen height
 kScreenHeight(BuildContext context) => MediaQuery.of(context).size.height;
 
+/// get screen width
 kScreenWidth(BuildContext context) => MediaQuery.of(context).size.width;
 
+/// set status bar color
 kColorStatusBar(context, color) => SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(statusBarColor: color));
 
+/// show const cube loader
 kCubeLoader(context) => Consumer<ThemeProvider>(
     builder: (context, model, child) => Center(child:
             LoaderFadingCube(itemBuilder: (BuildContext context, int index) {
@@ -86,6 +96,7 @@ kCubeLoader(context) => Consumer<ThemeProvider>(
                   color: model.isDarkTheme ? whiteColor : greenColor));
         })));
 
+/// show const three dots loader
 kThreeDotsLoader({context, color = blueColor, size = 20.0}) =>
     Consumer<ThemeProvider>(
         builder: (context, model, child) => Container(
@@ -99,6 +110,7 @@ kThreeDotsLoader({context, color = blueColor, size = 20.0}) =>
                               borderRadius: BorderRadius.circular(25.0)));
                     }))));
 
+/// show const circular  loader
 kCircularLoader({context, height = 25.0, width = 25.0, color = whiteColor}) =>
     Container(
         height: height,
@@ -106,6 +118,7 @@ kCircularLoader({context, height = 25.0, width = 25.0, color = whiteColor}) =>
         child: CircularProgressIndicator(
             strokeWidth: 6, valueColor: AlwaysStoppedAnimation<Color>(color)));
 
+/// show const alert dialog
 Future kAlertDialog(context,
         {required heading,
         required subheading,
@@ -135,7 +148,8 @@ Future kAlertDialog(context,
                           child: CustomText(text: secBtnText))
                     ])));
 
-kBackArrow(context, {onTap, arrowColor = blackColor}) =>
+/// show const back arrow
+kBackArrow(context, {onTap, arrowColor = blackColor, path = 'left_arrow'}) =>
     navigationCanPop(context: context)
         ? Consumer<ThemeProvider>(
             builder: (context, model, child) => GestureDetector(
@@ -144,15 +158,19 @@ kBackArrow(context, {onTap, arrowColor = blackColor}) =>
                 child: Container(
                     padding: EdgeInsets.all(10.0),
                     child: Center(
-                        child: kImageAsset(context, 'left_arrow',
+                        child: kImageAsset(context, path,
                             height: 20.0,
                             width: 20.0,
                             color: arrowColor ?? blackColor)))))
         : Container();
 
+/// get app bar preferred
 const kAppbarPreferredHeight = Size.fromHeight(60.0);
+
+/// get app bar height
 const kAppbarHeight = 60.0;
 
+/// check internet
 Future<bool> kInternetCheck() async {
   try {
     final result = await InternetAddress.lookup('google.com');
@@ -165,6 +183,7 @@ Future<bool> kInternetCheck() async {
   }
 }
 
+/// network image
 kNetworkCircularImage(context, url,
         {width = 100.0,
         height = 100.0,
@@ -181,6 +200,7 @@ kNetworkCircularImage(context, url,
             borderRadius: BorderRadius.all(Radius.circular(50.0)),
             color: bgColor ?? Colors.transparent));
 
+/// click action
 kClickActionSquash(
         {required BuildContext context,
         required Widget child,
@@ -205,13 +225,17 @@ kClickActionSquash(
               onTap();
             });
 
+/// show log
 kPrintLog(message) => log(message ?? "");
 
+/// constant padding
 const kBodyPadding = 20.0;
 
+/// scroll expand view
 Widget kScrollingView(columnChild) => CustomScrollView(
     slivers: [SliverFillRemaining(hasScrollBody: false, child: columnChild)]);
 
+/// show time picker
 Future<TimeOfDay?> showTimePickerDialog(context) async {
   return showTimePicker(
       context: context,
@@ -221,6 +245,7 @@ Future<TimeOfDay?> showTimePickerDialog(context) async {
           child: child!));
 }
 
+/// show date picker
 Future<DateTime?> showDatePickerDialog(context) async {
   return showDatePicker(
       context: context,
@@ -229,24 +254,7 @@ Future<DateTime?> showDatePickerDialog(context) async {
       lastDate: DateTime(2101));
 }
 
-extension TimeOfDayExtension on TimeOfDay {
-  int smallGreaterCompare(TimeOfDay other) {
-    if (this.hour < other.hour) return -1;
-    if (this.hour > other.hour) return 1;
-    if (this.minute < other.minute) return -1;
-    if (this.minute > other.minute) return 1;
-    return 0;
-  }
-
-  int durationDiff(TimeOfDay other, int duration) {
-    if (this.hour < other.hour &&
-        (other.minute - this.minute).abs() == duration) return -1;
-    if (this.hour > other.hour &&
-        (this.minute - other.minute).abs() == duration) return 1;
-    return 0;
-  }
-}
-
+/// show time diff
 String timeDifference(String endedAt) {
   var endDate = DateTime.parse(endedAt).toLocal();
   var currentDate = DateTime.now();
@@ -267,6 +275,7 @@ String timeDifference(String endedAt) {
   return "$timeMin";
 }
 
+/// gallery picker
 kGalleryPicker(context, {source}) => showModalBottomSheet(
     context: context,
     builder: (BuildContext bc) {
@@ -295,6 +304,7 @@ kGalleryPicker(context, {source}) => showModalBottomSheet(
               color: whiteColor));
     });
 
+/// constant no data
 Widget kNoDataText({required text, size = size18}) => CustomText(
     text: text,
     textAlign: TextAlign.center,
@@ -302,6 +312,7 @@ Widget kNoDataText({required text, size = size18}) => CustomText(
     color: greyColor1,
     fontSize: size);
 
+/// constant popup
 kYesNoSheet(
     {required context,
     required Function yes,
@@ -392,6 +403,7 @@ kYesNoSheet(
                 }));
 }
 
+/// constant popup
 kYesNoDialog(
     {required context,
     required centerText,
@@ -486,9 +498,11 @@ kYesNoDialog(
       });
 }
 
+/// constant app bar line
 Widget kAppBarBottomLine({color = greyColor, height: 1.5}) =>
     Container(color: color.withOpacity(0.13), height: height);
 
+/// constant text style
 TextStyle kTextStyle(
         {decoration = TextDecoration.none,
         fontFamily = fontFamily,

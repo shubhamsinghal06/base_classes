@@ -96,3 +96,22 @@ extension WidgetExtension on Widget {
 
   Widget get alignCenter => Align(child: this, alignment: Alignment.center);
 }
+
+/// show time diff
+extension TimeOfDayExtension on TimeOfDay {
+  int smallGreaterCompare(TimeOfDay other) {
+    if (this.hour < other.hour) return -1;
+    if (this.hour > other.hour) return 1;
+    if (this.minute < other.minute) return -1;
+    if (this.minute > other.minute) return 1;
+    return 0;
+  }
+
+  int durationDiff(TimeOfDay other, int duration) {
+    if (this.hour < other.hour &&
+        (other.minute - this.minute).abs() == duration) return -1;
+    if (this.hour > other.hour &&
+        (this.minute - other.minute).abs() == duration) return 1;
+    return 0;
+  }
+}
