@@ -3,7 +3,6 @@ library base_classes;
 export 'dart:async';
 export 'dart:convert';
 export 'dart:developer' hide Flow;
-export 'dart:io';
 
 export 'package:base_classes/utils/base_widgets/custom_app_bar.dart';
 export 'package:base_classes/utils/base_widgets/custom_button.dart';

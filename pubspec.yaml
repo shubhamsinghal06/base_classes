@@ -1,6 +1,6 @@
 name: base_classes
 description: It includes set of all base classes along with Utils like Scaffold,Button,Text,TextForm Field, CustomTextForm Appbar,Constant.
-version: 3.1.1
+version: 3.1.2
 author: Shubham Singhal <shubhamanonymous@gmail.com>
 homepage: https://github.com/shubhamsinghal06/base_classes.git
 

@@ -1,4 +1,8 @@
-## [3.1.0] - 2 June 2021
+## [3.1.2] - 3 June 2021
+
+* adding null safety with changes and scrores
+
+## [3.1.1] - 2 June 2021
 
 * adding null safety with changes
 

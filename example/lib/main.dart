@@ -10,12 +10,17 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        key: navigatorKey,
-        debugShowCheckedModeBanner: false,
-        title: 'Base Classes Demo',
-        theme: ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
-        home: MyHomePage(title: 'Base Classes Demo Home Page'));
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ],
+        child: MaterialApp(
+            key: navigatorKey,
+            debugShowCheckedModeBanner: false,
+            title: 'Base Classes Demo',
+            theme:
+                ThemeData(visualDensity: VisualDensity.adaptivePlatformDensity),
+            home: MyHomePage(title: 'Base Classes Demo Home Page')));
   }
 }
 

@@ -170,19 +170,6 @@ const kAppbarPreferredHeight = Size.fromHeight(60.0);
 /// get app bar height
 const kAppbarHeight = 60.0;
 
-/// check internet
-Future<bool> kInternetCheck() async {
-  try {
-    final result = await InternetAddress.lookup('google.com');
-    if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-      return true;
-    }
-    return false;
-  } on Exception catch (_) {
-    return false;
-  }
-}
-
 /// network image
 kNetworkCircularImage(context, url,
         {width = 100.0,
